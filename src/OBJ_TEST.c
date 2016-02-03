@@ -15,17 +15,6 @@
 #include "DECEN_OBJ.h"
 
 
-
-
-
-
-
-
-
-
-
-
-
 int main(void) {
 
     PARENT_OBJ p={0};
@@ -40,12 +29,17 @@ int main(void) {
 
     p.pub=
     c.pub=
-    d.pub=30;
+    d.pub=100;
     PARENT_OBJ *obj_arr[]={&p,&c,&d};
 
+    for(int i=0;i<sizeof(obj_arr)/sizeof(PARENT_OBJ *);i++)
+    {
+
+        printf("GetPublic!!!::%d\n",obj_arr[i]->GetPublic(obj_arr[i]));
+    }
 
 
-    printf("!!!Hello GetPublic!!!::%d..%d..%d\n",p.GetPublic(&p),c.GetPublic(&c),d.GetPublic(&d));
+
 	printf("!!!Hello sizeof!!!::%d..%d..%d\n",sizeof(PARENT_OBJ),sizeof(CHILD_OBJ),sizeof(DECEN_OBJ)); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
 }
