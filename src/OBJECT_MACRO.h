@@ -4,7 +4,7 @@
 #define NULL_OBJ_INH_
 
 #define __METHOD__DECLARE(PREFIX,RET,FUNCNAME,...)\
-        RET  PREFIX##_##FUNCNAME ( __VA_ARGS__ );
+        static RET  PREFIX##_##FUNCNAME ( __VA_ARGS__ );
 #define __METHOD__SPAN(PREFIX,RET,FUNCNAME,...)\
         RET (* FUNCNAME )( __VA_ARGS__ );
 
@@ -20,29 +20,22 @@
         omni_obj_____->FUNCNAME=PREFIX##_##FUNCNAME;\
 
 #define __METHOD__OVERRIDE_SETTING(PREFIX,RET,FUNCNAME,...)\
-        omni_obj_____->SUPER_##FUNCNAME=omni_obj_____->FUNCNAME;\
-        omni_obj_____->FUNCNAME=PREFIX##_##FUNCNAME;\
+        omni_obj_____->SUPER_##FUNCNAME=(void*)omni_obj_____->FUNCNAME;\
+        omni_obj_____->FUNCNAME=(void*)PREFIX##_##FUNCNAME;\
 
 #define OBJECT_INIT_METHOD(CLASSNAME,obj_ptr)\
-        __OMNI__##CLASSNAME *omni_obj_____=(__OMNI__##CLASSNAME*)obj;\
+        __OMNI__##CLASSNAME *omni_obj_____=(void*)obj;\
         CLASSNAME##_PUBLIC_METHOD_(CLASSNAME,__METHOD__SETTING)\
         CLASSNAME##_PRIVATE_METHOD_(CLASSNAME,__METHOD__SETTING)\
         CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,__METHOD__OVERRIDE_SETTING)\
 
-#define OBJECT_INHERIT(CLASSNAME,CLASS_SUPER) \
+#define OBJECT_INHERIT_DECLARE(CLASSNAME,CLASS_SUPER) \
         typedef struct _##CLASSNAME CLASSNAME;\
         typedef struct ___OMNI__##CLASSNAME __OMNI__##CLASSNAME;\
-        CLASSNAME##_PUBLIC_METHOD_(CLASSNAME,__METHOD__DECLARE)/*declare the function first*/\
-        struct  _PUBLIC_METHOD_##CLASSNAME\
-        {\
-            CLASSNAME##_PUBLIC_METHOD_(CLASSNAME,__METHOD__SPAN)\
-        };\
-        CLASSNAME##_PRIVATE_METHOD_(CLASSNAME,__METHOD__DECLARE)/*declare the function first*/\
         struct  _PRIVATE_METHOD_##CLASSNAME\
         {\
             CLASSNAME##_PRIVATE_METHOD_(CLASSNAME,__METHOD__SPAN)\
         };\
-        CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,__METHOD__DECLARE)/*declare the function first*/\
         struct  _OVERRIDE_METHOD_##CLASSNAME\
         {\
             CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,__METHOD__OVERRIDE_SPAN)\
@@ -74,4 +67,11 @@
         };\
         int CONSTRUCTOR_##CLASSNAME( CLASSNAME * obj);\
         int DESTRUCTOR_##CLASSNAME( CLASSNAME * obj);
+
+#define OBJECT_INHERIT_IMPLEMENT(CLASSNAME,CLASS_SUPER) \
+        CLASSNAME##_PUBLIC_METHOD_(CLASSNAME,__METHOD__DECLARE)/*declare the function first*/\
+        CLASSNAME##_PRIVATE_METHOD_(CLASSNAME,__METHOD__DECLARE)/*declare the function first*/\
+        CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,__METHOD__DECLARE)/*declare the function first*/\
+
+
 #endif  //OBJ_MACRO_H_

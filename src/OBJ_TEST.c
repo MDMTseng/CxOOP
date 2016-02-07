@@ -30,16 +30,14 @@ int main(void) {
     p.pub=
     c.pub=
     d.pub=100;
-    PARENT_OBJ *obj_arr[]={&p,&c,&d};
+    PARENT_OBJ *obj_arr[]={&p,(void*)&c,(void*)&d};
 
     for(int i=0;i<sizeof(obj_arr)/sizeof(PARENT_OBJ *);i++)
     {
-
         printf("GetPublic!!!::%d\n",obj_arr[i]->GetPublic(obj_arr[i]));
     }
+	printf("!!!Hello sizeof!!!::%d..%d..%d\n",(int)sizeof(PARENT_OBJ),(int)sizeof(CHILD_OBJ),(int)sizeof(DECEN_OBJ)); /* prints !!!Hello World!!! */
 
 
-
-	printf("!!!Hello sizeof!!!::%d..%d..%d\n",sizeof(PARENT_OBJ),sizeof(CHILD_OBJ),sizeof(DECEN_OBJ)); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
 }
