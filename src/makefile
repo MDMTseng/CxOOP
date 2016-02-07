@@ -5,7 +5,7 @@ OBJECTS := $(addprefix ../$(OBJ_FILE_DIR)/, $(OBJECTS))
 EXECUTABLE=../$(EXE_BIN_DIR)/OUT_exe
 
 
-
+CFLAGS=-c -Wall -I../COOP_lib
 
 all: $(SOURCES) $(EXECUTABLE)
     
@@ -14,7 +14,7 @@ $(EXECUTABLE): $(OBJECTS)
 
 ../$(OBJ_FILE_DIR)/%.o : %.c
 	@echo $< 
-	$(CC) $(LDFLAGS) -c $< -o $@
+	$(CC) $(LDFLAGS) $(CFLAGS) -c $< -o $@
 	
 
 clean:
