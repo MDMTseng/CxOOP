@@ -5,7 +5,7 @@ OBJECTS := $(addprefix ../$(OBJ_FILE_DIR)/, $(OBJECTS))
 EXECUTABLE=../$(EXE_BIN_DIR)/OUT_exe
 
 
-CFLAGS=-c -Wall -I../COOP_lib
+CFLAGS=-c -Wall -I../CxOOP_lib
 
 all: $(SOURCES) $(EXECUTABLE)
     

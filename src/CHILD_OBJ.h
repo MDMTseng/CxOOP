@@ -2,7 +2,7 @@
 #ifndef CHILD_OBJ_H_
 #define CHILD_OBJ_H_
 
-#include "OBJECT_MACRO.h"
+#include "CxOOP.h"
 #include "PARENT_OBJ.h"
 
 #define CHILD_OBJ_PUBLIC_MEMBER_\

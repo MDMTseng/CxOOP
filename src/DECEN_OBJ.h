@@ -2,7 +2,7 @@
 #ifndef DECEN_OBJ_H_
 #define DECEN_OBJ_H_
 
-#include "OBJECT_MACRO.h"
+#include "CxOOP.h"
 #include "CHILD_OBJ.h"
 
 #define DECEN_OBJ_PUBLIC_MEMBER_\
