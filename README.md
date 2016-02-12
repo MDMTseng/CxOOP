@@ -1,5 +1,5 @@
 # CxOOP
-A simple MACRO (77 lines) let you write oop with C
+A simple MACRO (77 lines) let you write oop with C easier and cleaner
 
 ##You Can Do:
  - Public/Private member
