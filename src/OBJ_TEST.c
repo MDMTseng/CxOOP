@@ -17,6 +17,7 @@
 
 int main(void) {
 
+    int i;
     PARENT_OBJ p={0};
     CONSTRUCTOR_PARENT_OBJ(&p);
 
@@ -32,7 +33,7 @@ int main(void) {
     d.pub=100;
     PARENT_OBJ *obj_arr[]={&p,(void*)&c,(void*)&d};
 
-    for(int i=0;i<sizeof(obj_arr)/sizeof(PARENT_OBJ *);i++)
+    for(i=0;i<sizeof(obj_arr)/sizeof(PARENT_OBJ *);i++)
     {
         printf("GetPublic!!!::%d\n",obj_arr[i]->GetPublic(obj_arr[i]));
     }
