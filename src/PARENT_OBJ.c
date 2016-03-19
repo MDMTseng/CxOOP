@@ -2,11 +2,11 @@
 #include "PARENT_OBJ.h"
 #include <stdio.h>
 
-OBJECT_INHERIT_IMPLEMENT(PARENT_OBJ,NULL_OBJ)
+CxOOP_INHERIT_IMPLEMENT(PARENT_OBJ,NULL_OBJ)
 
 int CONSTRUCTOR_PARENT_OBJ(PARENT_OBJ* obj)
 {
-    OBJECT_INIT_METHOD(PARENT_OBJ,obj);
+	CxOOP_INIT_METHOD(PARENT_OBJ,obj);
     __OMNI__PARENT_OBJ *oobj=(void*)obj;
 
     printf("@@@@@@@@@@@@@@@@@@@@@@@@@\n");
