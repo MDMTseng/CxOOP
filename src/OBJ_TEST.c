@@ -27,6 +27,14 @@ int main(void) {
     DECEN_OBJ d={0};
     CONSTRUCTOR_DECEN_OBJ(&d);
 
+	char *ss[]={CxOOP_INHERIT_HISTORY(DECEN_OBJ)};
+
+    for(int i=0;i<sizeof(ss)/sizeof(ss[0]);i++)
+    {
+        printf(">>>%s\n",ss[i]);
+    }
+	printf("\n");
+
 
     p.pub=
     c.pub=

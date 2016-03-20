@@ -6,8 +6,7 @@
 #include "PARENT_OBJ.h"
 
 #define CHILD_OBJ_PUBLIC_MEMBER_\
-		int child_ID;\
-		int array[100];
+		int child_ID;
 
 #define CHILD_OBJ_PRIVATE_MEMBER_\
 
@@ -21,14 +20,11 @@
 
 
 
-CxOOP_INHERIT_DECLARE(CHILD_OBJ,PARENT_OBJ)
+#define CHILD_OBJ_DNA_(X1,X2)  \
+		PARENT_OBJ_DNA_(X1,X1)\
+        X2(CHILD_OBJ)
 
-//#define CHILD_OBJ_INH_      OBJECT_INHERIT_STRUCT_PRIDELCARE_(CHILD_OBJ,PARENT_OBJ)
-
-
-#define CHILD_OBJ_INH_  \
-        PARENT_OBJ_INH_\
-        CxOOP_STRUCT_PRIDELCARE_(CHILD_OBJ)
+CxOOP_OBJECT_DECLARE(CHILD_OBJ)
 
 
 #endif
