@@ -8,6 +8,7 @@
  ============================================================================
  */
 
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "PARENT_OBJ.h"
@@ -27,9 +28,15 @@ int main(void) {
     DECEN_OBJ d={0};
     CONSTRUCTOR_DECEN_OBJ(&d);
 
-	char *ss[]={CxOOP_INHERIT_HISTORY(DECEN_OBJ)};
+    printf("CxOOP_INHERIT_DEPTH(PARENT_OBJ):%d\n",CxOOP_INHERIT_DEPTH(PARENT_OBJ));
+    printf("CxOOP_INHERIT_DEPTH(CHILD_OBJ):%d\n",CxOOP_INHERIT_DEPTH(CHILD_OBJ));
+    printf("CxOOP_INHERIT_DEPTH(DECEN_OBJ):%d\n",CxOOP_INHERIT_DEPTH(DECEN_OBJ));
 
-    for(int i=0;i<sizeof(ss)/sizeof(ss[0]);i++)
+    char *ss[]={CxOOP_INHERIT_HISTORY_NAME(DECEN_OBJ)};
+    int i;
+    printf("\n");
+    printf("CxOOP_INHERIT_HISTORY_NAME(DECEN_OBJ)\n");
+    for(i=0;i<sizeof(ss)/sizeof(ss[0]);i++)
     {
         printf(">>>%s\n",ss[i]);
     }
@@ -39,9 +46,9 @@ int main(void) {
     p.pub=
     c.pub=
     d.pub=100;
-    PARENT_OBJ *obj_arr[]={&p,(void*)&c,(void*)&d};
+    PARENT_OBJ *obj_arr[]={&p,CxOOP_DCAST(PARENT_OBJ,&c) ,DCAST(PARENT_OBJ,&d)};
 
-    for(int i=0;i<sizeof(obj_arr)/sizeof(obj_arr[0]);i++)
+    for(i=0;i<sizeof(obj_arr)/sizeof(obj_arr[0]);i++)
     {
         printf("GetPublic!!!::%d\n",obj_arr[i]->GetPublic(obj_arr[i]));
     }

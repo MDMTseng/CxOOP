@@ -18,11 +18,11 @@
         CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,CxOOP__METHOD__OVERRIDE_SPAN)\
 
 #define CxOOP_STRUCT_OBJ_(CLASSNAME)\
-		CxOOP_STRUCT_PUB_(CLASSNAME)\
+        CxOOP_STRUCT_PUB_(CLASSNAME)\
         const char ___##CLASSNAME##_priv_space[sizeof(struct _PRIVATE_SPACE_##CLASSNAME)];\
 
 #define CxOOP_STRUCT___OMNI__OBJ_(CLASSNAME)\
-		CxOOP_STRUCT_PUB_(CLASSNAME)\
+        CxOOP_STRUCT_PUB_(CLASSNAME)\
         CxOOP_STRUCT_PRIV_(CLASSNAME)
 
 #define CxOOP_OBJECT_DECLARE(CLASSNAME) \
@@ -30,7 +30,7 @@
         typedef struct ___OMNI__##CLASSNAME __OMNI__##CLASSNAME;\
         struct  _PRIVATE_SPACE_##CLASSNAME\
         {\
-        	CxOOP_STRUCT_PRIV_(CLASSNAME)\
+            CxOOP_STRUCT_PRIV_(CLASSNAME)\
         };\
         struct ___OMNI__##CLASSNAME/* A struct to access all members, use it carefully */\
         {\
@@ -61,10 +61,16 @@
         CLASSNAME##_PRIVATE_METHOD_(CLASSNAME,CxOOP__METHOD__SETTING)\
         CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,CxOOP__METHOD__OVERRIDE_SETTING)\
 
+#define CxOOP_DCAST(toCLASS,obj_PTR)  (void*)((obj_PTR)+(  0*(unsigned long)((obj_PTR)->___##toCLASS##_priv_space)  ))
+#define DCAST(toCLASS,obj_PTR)  CxOOP_DCAST(toCLASS,obj_PTR)
+
 #define CxOOP__DNA_NAME_SPAN(OBJ_DNA) #OBJ_DNA,
 
 /*Allow you to inspect inheritance history*/
-#define CxOOP_INHERIT_HISTORY(CLASSNAME) CLASSNAME##_DNA_(CxOOP__DNA_NAME_SPAN,CxOOP__DNA_NAME_SPAN)
+#define CxOOP_INHERIT_HISTORY_NAME(CLASSNAME) CLASSNAME##_DNA_(CxOOP__DNA_NAME_SPAN,CxOOP__DNA_NAME_SPAN)
+
+#define CxOOP__DNA_INC_SPAN(OBJ_DNA) +1
+/*Allow you to inspect inheritance history*/
+#define CxOOP_INHERIT_DEPTH(CLASSNAME) (CLASSNAME##_DNA_(CxOOP__DNA_INC_SPAN,CxOOP__DNA_INC_SPAN))
 
 #endif  //C_X_OOP_H_
-
