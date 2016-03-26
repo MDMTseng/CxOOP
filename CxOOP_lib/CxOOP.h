@@ -65,12 +65,11 @@
 #define DCAST(toCLASS,obj_PTR)  CxOOP_DCAST(toCLASS,obj_PTR)
 
 #define CxOOP__DNA_NAME_SPAN(OBJ_DNA) #OBJ_DNA,
-
-/*Allow you to inspect inheritance history*/
+/*Get inheritance history String Array*/
 #define CxOOP_INHERIT_HISTORY_NAME(CLASSNAME) CLASSNAME##_DNA_(CxOOP__DNA_NAME_SPAN,CxOOP__DNA_NAME_SPAN)
 
 #define CxOOP__DNA_INC_SPAN(OBJ_DNA) +1
-/*Allow you to inspect inheritance history*/
+/*Get inheritance depth count*/
 #define CxOOP_INHERIT_DEPTH(CLASSNAME) (CLASSNAME##_DNA_(CxOOP__DNA_INC_SPAN,CxOOP__DNA_INC_SPAN))
 
 #endif  //C_X_OOP_H_
