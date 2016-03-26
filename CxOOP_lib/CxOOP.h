@@ -61,7 +61,7 @@
         CLASSNAME##_PRIVATE_METHOD_(CLASSNAME,CxOOP__METHOD__SETTING)\
         CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,CxOOP__METHOD__OVERRIDE_SETTING)\
 
-#define CxOOP_DCAST(toCLASS,obj_PTR)  (void*)((obj_PTR)+(  0*(unsigned long)((obj_PTR)->___##toCLASS##_priv_space)  ))
+#define CxOOP_DCAST(toCLASS,obj_PTR)  ((toCLASS*)((void*)((obj_PTR)+(  0*(unsigned long)((obj_PTR)->___##toCLASS##_priv_space)  ))))
 #define DCAST(toCLASS,obj_PTR)  CxOOP_DCAST(toCLASS,obj_PTR)
 
 #define CxOOP__DNA_NAME_SPAN(OBJ_DNA) #OBJ_DNA,
