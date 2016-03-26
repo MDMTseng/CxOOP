@@ -6,22 +6,19 @@
 #include "PARENT_OBJ.h"
 
 #define CHILD_OBJ_PUBLIC_MEMBER_\
-		int child_ID;
+        int child_ID;
 
 #define CHILD_OBJ_PRIVATE_MEMBER_\
-
 
 #define CHILD_OBJ_PUBLIC_METHOD_(PREFIX,MACRO_X)\
 
 #define CHILD_OBJ_PRIVATE_METHOD_(PREFIX,MACRO_X)\
 
 #define CHILD_OBJ_OVERRIDE_METHOD_(PREFIX,MACRO_X)\
-        MACRO_X(PREFIX,int,GetPublic, CHILD_OBJ* a)\
-
-
+        MACRO_X(PREFIX,int,DoAction, CHILD_OBJ* a)\
 
 #define CHILD_OBJ_DNA_(X1,X2)  \
-		PARENT_OBJ_DNA_(X1,X1)\
+        PARENT_OBJ_DNA_(X1,X1)\
         X2(CHILD_OBJ)
 
 CxOOP_OBJECT_DECLARE(CHILD_OBJ)

@@ -28,21 +28,22 @@ int main(void) {
     DECEN_OBJ d={0};
     CONSTRUCTOR_DECEN_OBJ(&d);
 
+    printf("\n================CxOOP_INHERIT_DEPTH=============\n");
     printf("CxOOP_INHERIT_DEPTH(PARENT_OBJ):%d\n",CxOOP_INHERIT_DEPTH(PARENT_OBJ));
     printf("CxOOP_INHERIT_DEPTH(CHILD_OBJ):%d\n",CxOOP_INHERIT_DEPTH(CHILD_OBJ));
     printf("CxOOP_INHERIT_DEPTH(DECEN_OBJ):%d\n",CxOOP_INHERIT_DEPTH(DECEN_OBJ));
 
     char *ss[]={CxOOP_INHERIT_HISTORY_NAME(DECEN_OBJ)};
     int i;
-    printf("\n");
+    printf("\n===============CxOOP_INHERIT_HISTORY_NAME==============\n");
     printf("CxOOP_INHERIT_HISTORY_NAME(DECEN_OBJ)\n");
     for(i=0;i<sizeof(ss)/sizeof(ss[0]);i++)
     {
         printf(">>>%s\n",ss[i]);
     }
-	printf("\n");
 
 
+    printf("\n===============Safe DownCast & polymorphism==============\n");
     p.pub=
     c.pub=
     d.pub=100;
@@ -50,10 +51,14 @@ int main(void) {
 
     for(i=0;i<sizeof(obj_arr)/sizeof(obj_arr[0]);i++)
     {
-        printf("GetPublic!!!::%d\n",obj_arr[i]->GetPublic(obj_arr[i]));
+        printf("DoAction!!!::%d\n",obj_arr[i]->DoAction(obj_arr[i]));
     }
-	printf("!!!Hello sizeof!!!::%d..%d..%d\n",(int)sizeof(PARENT_OBJ),(int)sizeof(CHILD_OBJ),(int)sizeof(DECEN_OBJ));
 
 
-	return EXIT_SUCCESS;
+
+    printf("\n===============Object size==============\n");
+    printf("!!!Hello sizeof!!!::%d..%d..%d\n",(int)sizeof(PARENT_OBJ),(int)sizeof(CHILD_OBJ),(int)sizeof(DECEN_OBJ));
+
+
+    return EXIT_SUCCESS;
 }

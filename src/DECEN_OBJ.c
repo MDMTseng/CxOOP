@@ -5,17 +5,9 @@
 CxOOP_DECLARE_METHOD(DECEN_OBJ)
 int CONSTRUCTOR_DECEN_OBJ(DECEN_OBJ* obj)
 {
-    CONSTRUCTOR_CHILD_OBJ((void*)obj);
+    CONSTRUCTOR_CHILD_OBJ(DCAST(CHILD_OBJ,obj));
     CxOOP_INIT_METHOD(DECEN_OBJ,obj);
-
-
     __OMNI__DECEN_OBJ *oobj=(void*)obj;
-
-    printf("d===oobj->GetPublic>>%p\n",(void*)oobj->GetPublic);
-    printf("====CHILD_OBJ_GetPublic>>%p\n",DECEN_OBJ_GetPublic);
-    printf("===oobj->SUPER_GetPublic>>%p\n",oobj->SUPER_GetPublic);
-    printf("%s>>>%p\n================\n",__func__,(void*)CONSTRUCTOR_DECEN_OBJ);
-
     return 0;
 }
 
@@ -25,12 +17,13 @@ int DESTRUCTOR_DECEN_OBJ(DECEN_OBJ* obj)
     return 0;
 }
 
-
-static int DECEN_OBJ_GetPublic( DECEN_OBJ* obj)
+static int DECEN_OBJ_DoAction( DECEN_OBJ* obj)
 {
     __OMNI__DECEN_OBJ *oobj=(void*)obj;
 
-    int ret=oobj->SUPER_GetPublic((void*)oobj)+20;
-    printf("%s\n",__func__);
+    int superResult=oobj->SUPER_DoAction((void*)oobj);
+    int ret=superResult+20;
+
+    printf("%s call ^ SUPER_GetPublic:%d + 20 = %d \n",__func__,superResult,ret);
     return ret;
 }
