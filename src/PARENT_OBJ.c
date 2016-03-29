@@ -7,7 +7,6 @@ CxOOP_DECLARE_METHOD(PARENT_OBJ)
 int CONSTRUCTOR_PARENT_OBJ(PARENT_OBJ* obj)
 {
     CxOOP_INIT_METHOD(PARENT_OBJ,obj);
-    __OMNI__PARENT_OBJ *oobj=(void*)obj;
     return 0;
 }
 

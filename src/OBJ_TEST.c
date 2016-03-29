@@ -28,19 +28,7 @@ int main(void) {
     DECEN_OBJ d={0};
     CONSTRUCTOR_DECEN_OBJ(&d);
 
-    printf("\n================CxOOP_INHERIT_DEPTH=============\n");
-    printf("CxOOP_INHERIT_DEPTH(PARENT_OBJ):%d\n",CxOOP_INHERIT_DEPTH(PARENT_OBJ));
-    printf("CxOOP_INHERIT_DEPTH(CHILD_OBJ):%d\n",CxOOP_INHERIT_DEPTH(CHILD_OBJ));
-    printf("CxOOP_INHERIT_DEPTH(DECEN_OBJ):%d\n",CxOOP_INHERIT_DEPTH(DECEN_OBJ));
-
-    char *ss[]={CxOOP_INHERIT_HISTORY_NAME(DECEN_OBJ)};
     int i;
-    printf("\n===============CxOOP_INHERIT_HISTORY_NAME==============\n");
-    printf("CxOOP_INHERIT_HISTORY_NAME(DECEN_OBJ)\n");
-    for(i=0;i<sizeof(ss)/sizeof(ss[0]);i++)
-    {
-        printf(">>>%s\n",ss[i]);
-    }
 
 
     printf("\n===============Safe DownCast & polymorphism==============\n");

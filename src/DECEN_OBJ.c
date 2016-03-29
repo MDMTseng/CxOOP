@@ -7,13 +7,11 @@ int CONSTRUCTOR_DECEN_OBJ(DECEN_OBJ* obj)
 {
     CONSTRUCTOR_CHILD_OBJ(DCAST(CHILD_OBJ,obj));
     CxOOP_INIT_METHOD(DECEN_OBJ,obj);
-    __OMNI__DECEN_OBJ *oobj=(void*)obj;
     return 0;
 }
 
 int DESTRUCTOR_DECEN_OBJ(DECEN_OBJ* obj)
 {
-    __OMNI__DECEN_OBJ *oobj=(void*)obj;
     return 0;
 }
 
