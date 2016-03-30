@@ -1,11 +1,38 @@
 #ifndef C_X_OOP_H_
 #define C_X_OOP_H_
 
-#define CxOOP__METHOD__DECLARE(PREFIX,RET,FUNCNAME,...)\
-        static RET PREFIX##_##FUNCNAME ( __VA_ARGS__ );
-#define CxOOP__METHOD__SPAN(PREFIX,RET,FUNCNAME,...)\
+
+#define CxOOP_CAT_rev(x, ...) CxOOP_PRIMITIVE_CAT_rev(x, __VA_ARGS__  )
+#define CxOOP_PRIMITIVE_CAT_rev(x, ...) __VA_ARGS__  ## x
+
+#define CxOOP_DNA_SPAN(seq) CxOOP_CAT_rev(_END,CxOOP_DNA_SPAN_1 seq)
+#define CxOOP_DNA_SPAN_1(XMACRO,X,OBJNAME,...) XMACRO##_1(X,OBJNAME,__VA_ARGS__) CxOOP_DNA_SPAN_2
+#define CxOOP_DNA_SPAN_2(XMACRO,X,OBJNAME,...) XMACRO##_2(X,OBJNAME,__VA_ARGS__) CxOOP_DNA_SPAN_LOOP0
+
+#define CxOOP_DNA_SPAN_LOOP0(XMACRO,X,OBJNAME,...) XMACRO##_LOOP(X,OBJNAME,__VA_ARGS__) CxOOP_DNA_SPAN_LOOP1
+#define CxOOP_DNA_SPAN_LOOP1(XMACRO,X,OBJNAME,...) XMACRO##_LOOP(X,OBJNAME,__VA_ARGS__) CxOOP_DNA_SPAN_LOOP0
+#define CxOOP_DNA_SPAN_1_END
+#define CxOOP_DNA_SPAN_2_END
+#define CxOOP_DNA_SPAN_LOOP0_END
+#define CxOOP_DNA_SPAN_LOOP1_END
+
+#define CxOOP_ExTR_1(X,OBJNAME,...)
+#define CxOOP_ExTR_2(X,OBJNAME,...)
+#define CxOOP_ExTR_LOOP(X,OBJNAME,...) X(OBJNAME)
+
+#define CxOOP_ExT1_1(X,OBJNAME,...)
+#define CxOOP_ExT1_2(X,OBJNAME,...) X(OBJNAME)
+#define CxOOP_ExT1_LOOP(X,OBJNAME,...)
+
+#define CxOOP_ExT0_1(X,OBJNAME,...) X(OBJNAME)
+#define CxOOP_ExT0_2(X,OBJNAME,...)
+#define CxOOP_ExT0_LOOP(X,OBJNAME,...)
+
+#define CxOOP__METHOD__DECLARE(OBJ,RET,FUNCNAME,...)\
+        static RET OBJ##_##FUNCNAME ( __VA_ARGS__ );
+#define CxOOP__METHOD__SPAN(OBJ,RET,FUNCNAME,...)\
         RET (* FUNCNAME )( __VA_ARGS__ );
-#define CxOOP__METHOD__OVERRIDE_SPAN(PREFIX,RET,FUNCNAME,...)\
+#define CxOOP__METHOD__OVERRIDE_SPAN(OBJ,RET,FUNCNAME,...)\
         RET (* SUPER_##FUNCNAME )( __VA_ARGS__ );
 
 #define CxOOP_STRUCT_PUB_(CLASSNAME)\
@@ -34,11 +61,15 @@
         };\
         struct ___OMNI__##CLASSNAME/* A struct to access all members, use it carefully */\
         {\
-            CLASSNAME##_DNA_(CxOOP_STRUCT_OBJ_,CxOOP_STRUCT___OMNI__OBJ_)\
+            CxOOP_DNA_SPAN(CLASSNAME##_DNA_(CxOOP_ExTR,CxOOP_STRUCT_OBJ_))\
+            CxOOP_DNA_SPAN(CLASSNAME##_DNA_(CxOOP_ExT1,CxOOP_STRUCT_OBJ_))\
+            CxOOP_DNA_SPAN(CLASSNAME##_DNA_(CxOOP_ExT0,CxOOP_STRUCT___OMNI__OBJ_))\
         };\
         struct _##CLASSNAME/* A struct to provide encapsulation */\
         {\
-            CLASSNAME##_DNA_(CxOOP_STRUCT_OBJ_,CxOOP_STRUCT_OBJ_)\
+            CxOOP_DNA_SPAN(CLASSNAME##_DNA_(CxOOP_ExTR,CxOOP_STRUCT_OBJ_))\
+            CxOOP_DNA_SPAN(CLASSNAME##_DNA_(CxOOP_ExT1,CxOOP_STRUCT_OBJ_))\
+            CxOOP_DNA_SPAN(CLASSNAME##_DNA_(CxOOP_ExT0,CxOOP_STRUCT_OBJ_))\
         };\
         int CONSTRUCTOR_##CLASSNAME( CLASSNAME * obj);\
         int DESTRUCTOR_##CLASSNAME( CLASSNAME * obj);
@@ -48,12 +79,12 @@
         CLASSNAME##_PRIVATE_METHOD_(CLASSNAME,CxOOP__METHOD__DECLARE)\
         CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,CxOOP__METHOD__DECLARE)\
 
-#define CxOOP__METHOD__SETTING(PREFIX,RET,FUNCNAME,...)\
-        omni_obj_____->FUNCNAME=PREFIX##_##FUNCNAME;\
+#define CxOOP__METHOD__SETTING(OBJ,RET,FUNCNAME,...)\
+        omni_obj_____->FUNCNAME=OBJ##_##FUNCNAME;\
 
-#define CxOOP__METHOD__OVERRIDE_SETTING(PREFIX,RET,FUNCNAME,...)\
+#define CxOOP__METHOD__OVERRIDE_SETTING(OBJ,RET,FUNCNAME,...)\
         omni_obj_____->SUPER_##FUNCNAME=(void*)omni_obj_____->FUNCNAME;\
-        omni_obj_____->FUNCNAME=(void*)PREFIX##_##FUNCNAME;\
+        omni_obj_____->FUNCNAME=(void*)OBJ##_##FUNCNAME;\
 
 #define CxOOP_INIT_METHOD(CLASSNAME,obj_ptr)\
         __OMNI__##CLASSNAME *omni_obj_____=(void*)obj_ptr;\
@@ -61,15 +92,7 @@
         CLASSNAME##_PRIVATE_METHOD_(CLASSNAME,CxOOP__METHOD__SETTING)\
         CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,CxOOP__METHOD__OVERRIDE_SETTING)\
 
-#define CxOOP_DCAST(toCLASS,obj_PTR)  ((toCLASS*)((void*)((obj_PTR)+(  0*(unsigned long)((obj_PTR)->___##toCLASS##_priv_space)  ))))
+#define CxOOP_DCAST(toCLASS,obj_PTR)  ((toCLASS*)((void*)((obj_PTR)+(  0*(int)((obj_PTR)->___##toCLASS##_priv_space)  ))))
 #define DCAST(toCLASS,obj_PTR)  CxOOP_DCAST(toCLASS,obj_PTR)
-
-#define CxOOP__DNA_NAME_SPAN(OBJ_DNA) #OBJ_DNA,
-/*Get inheritance history String Array*/
-#define CxOOP_INHERIT_HISTORY_NAME(CLASSNAME) CLASSNAME##_DNA_(CxOOP__DNA_NAME_SPAN,CxOOP__DNA_NAME_SPAN)
-
-#define CxOOP__DNA_INC_SPAN(OBJ_DNA) +1
-/*Get inheritance depth count*/
-#define CxOOP_INHERIT_DEPTH(CLASSNAME) (CLASSNAME##_DNA_(CxOOP__DNA_INC_SPAN,CxOOP__DNA_INC_SPAN))
 
 #endif  //C_X_OOP_H_
