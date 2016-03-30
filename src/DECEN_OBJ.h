@@ -5,6 +5,8 @@
 #include "CxOOP.h"
 #include "CHILD_OBJ.h"
 
+#define DECEN_OBJ_DNA_(X1,COBJ)  CHILD_OBJ_DNA_(X1,COBJ) X1(CHILD_OBJ,COBJ)
+
 #define DECEN_OBJ_PUBLIC_MEMBER_\
         int decendent_data;
 
@@ -17,9 +19,6 @@
 #define DECEN_OBJ_OVERRIDE_METHOD_(COBJ,MACRO_X)\
         MACRO_X(COBJ,int,DoAction, COBJ* self)\
 
-#define DECEN_OBJ_DNA_(X1,COBJ)  \
-        CHILD_OBJ_DNA_(X1,COBJ)\
-        X1(CHILD_OBJ,COBJ)
 
 CxOOP_OBJECT_DECLARE(DECEN_OBJ)
 

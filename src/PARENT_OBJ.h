@@ -4,6 +4,9 @@
 
 #include "CxOOP.h"
 
+#define PARENT_OBJ_DNA_(X,COBJ)
+
+
 #define PARENT_OBJ_PUBLIC_MEMBER_\
         int pub;\
 
@@ -20,7 +23,6 @@
 
 #define PARENT_OBJ_OVERRIDE_METHOD_(COBJ,MACRO_X)\
 
-#define PARENT_OBJ_DNA_(X,COBJ)
 
 CxOOP_OBJECT_DECLARE(PARENT_OBJ)
 
