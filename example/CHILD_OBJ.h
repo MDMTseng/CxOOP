@@ -1,4 +1,3 @@
-
 #ifndef CHILD_OBJ_H_
 #define CHILD_OBJ_H_
 
@@ -19,8 +18,6 @@
 #define CHILD_OBJ_OVERRIDE_METHOD_(COBJ,MACRO_X)\
         MACRO_X(COBJ,int,DoAction, COBJ* self)\
 
-
 CxOOP_OBJECT_DECLARE(CHILD_OBJ)
-
 
 #endif

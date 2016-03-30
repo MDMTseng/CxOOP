@@ -1,4 +1,3 @@
-
 #include "PARENT_OBJ.h"
 #include "CHILD_OBJ.h"
 #include <stdio.h>
@@ -9,9 +8,6 @@ int CONSTRUCTOR_CHILD_OBJ(CHILD_OBJ* obj)
 {
     CONSTRUCTOR_PARENT_OBJ(DCAST(PARENT_OBJ,obj));
     CxOOP_INIT_METHOD(CHILD_OBJ,obj);
-
-    //__OMNI__CHILD_OBJ *oobj=(void*)obj;
-
     obj->child_ID=5;
     return 0;
 }
@@ -32,4 +28,3 @@ static int CHILD_OBJ_DoAction( CHILD_OBJ* obj)
 
     return ret;
 }
-

@@ -18,6 +18,7 @@
 
 int main(void) {
 
+    int i;
     PARENT_OBJ p={0};
     CONSTRUCTOR_PARENT_OBJ(&p);
 
@@ -27,9 +28,6 @@ int main(void) {
 
     DECEN_OBJ d={0};
     CONSTRUCTOR_DECEN_OBJ(&d);
-
-    int i;
-
 
     printf("\n===============Safe DownCast & polymorphism==============\n");
     p.pub=
@@ -42,11 +40,8 @@ int main(void) {
         printf("DoAction!!!::%d\n",obj_arr[i]->DoAction(obj_arr[i]));
     }
 
-
-
     printf("\n===============Object size==============\n");
     printf("!!!Hello sizeof!!!::%d..%d..%d\n",(int)sizeof(PARENT_OBJ),(int)sizeof(CHILD_OBJ),(int)sizeof(DECEN_OBJ));
-
 
     return EXIT_SUCCESS;
 }

@@ -66,5 +66,4 @@
 #define CxOOP_DCAST(toCLASS,obj_PTR)  ((toCLASS*)((void*)((obj_PTR)+(  0*(unsigned long)((obj_PTR)->___##toCLASS##_priv_space)  ))))
 #define DCAST(toCLASS,obj_PTR)  CxOOP_DCAST(toCLASS,obj_PTR)
 
-
 #endif  //C_X_OOP_H_

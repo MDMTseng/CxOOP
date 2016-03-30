@@ -1,4 +1,3 @@
-
 #ifndef DECEN_OBJ_H_
 #define DECEN_OBJ_H_
 
@@ -18,7 +17,6 @@
 
 #define DECEN_OBJ_OVERRIDE_METHOD_(COBJ,MACRO_X)\
         MACRO_X(COBJ,int,DoAction, COBJ* self)\
-
 
 CxOOP_OBJECT_DECLARE(DECEN_OBJ)
 
