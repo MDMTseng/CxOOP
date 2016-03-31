@@ -21,7 +21,7 @@ static int CHILD_OBJ_DoAction( CHILD_OBJ* obj)
 {
     __OMNI__CHILD_OBJ *oobj=(void*)obj;
 
-    int superResult=oobj->SUPER_DoAction((void*)oobj);
+    int superResult=oobj->CHILD_OBJ_SUPER_DoAction((void*)oobj);
     int ret=superResult*2;
 
     printf("%s call ^ SUPER_GetPublic:%d *  2 = %d \n",__func__,superResult,ret);

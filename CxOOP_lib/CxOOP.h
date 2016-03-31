@@ -6,7 +6,7 @@
 #define CxOOP__METHOD__SPAN(PREFIX,RET,FUNCNAME,...)\
         RET (* FUNCNAME )( __VA_ARGS__ );
 #define CxOOP__METHOD__OVERRIDE_SPAN(PREFIX,RET,FUNCNAME,...)\
-        RET (* SUPER_##FUNCNAME )( __VA_ARGS__ );
+        RET (* PREFIX##_SUPER_##FUNCNAME )( __VA_ARGS__ );
 
 #define CxOOP_STRUCT_PUB_(CLASSNAME,COBJ)\
         CLASSNAME##_PUBLIC_MEMBER_\
@@ -15,7 +15,7 @@
 #define CxOOP_STRUCT_PRIV_(CLASSNAME,COBJ)\
         CLASSNAME##_PRIVATE_MEMBER_\
         CLASSNAME##_PRIVATE_METHOD_(COBJ,CxOOP__METHOD__SPAN)\
-        CLASSNAME##_OVERRIDE_METHOD_(COBJ,CxOOP__METHOD__OVERRIDE_SPAN)\
+        CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,CxOOP__METHOD__OVERRIDE_SPAN)\
 
 #define CxOOP_STRUCT_OBJ_(CLASSNAME,COBJ)\
         CxOOP_STRUCT_PUB_(CLASSNAME,COBJ)\
@@ -34,7 +34,7 @@
         };\
         struct ___OMNI__##CLASSNAME/* A struct to access all members, use it carefully */\
         {\
-            CLASSNAME##_DNA_(CxOOP_STRUCT_OBJ_,CLASSNAME)\
+            CLASSNAME##_DNA_(CxOOP_STRUCT___OMNI__OBJ_,CLASSNAME)\
             CxOOP_STRUCT___OMNI__OBJ_(CLASSNAME,CLASSNAME)\
         };\
         struct _##CLASSNAME/* A struct to provide encapsulation */\
@@ -54,7 +54,7 @@
         omni_obj_____->FUNCNAME=PREFIX##_##FUNCNAME;\
 
 #define CxOOP__METHOD__OVERRIDE_SETTING(PREFIX,RET,FUNCNAME,...)\
-        omni_obj_____->SUPER_##FUNCNAME=(void*)omni_obj_____->FUNCNAME;\
+        omni_obj_____->PREFIX##_SUPER_##FUNCNAME=(void*)omni_obj_____->FUNCNAME;\
         omni_obj_____->FUNCNAME=(void*)PREFIX##_##FUNCNAME;\
 
 #define CxOOP_INIT_METHOD(CLASSNAME,obj_ptr)\

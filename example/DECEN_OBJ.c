@@ -18,7 +18,7 @@ static int DECEN_OBJ_DoAction( DECEN_OBJ* obj)
 {
     __OMNI__DECEN_OBJ *oobj=(void*)obj;
 
-    int superResult=oobj->SUPER_DoAction((void*)oobj);
+    int superResult=oobj->DECEN_OBJ_SUPER_DoAction((void*)oobj);
     int ret=superResult+20;
 
     printf("%s call ^ SUPER_GetPublic:%d + 20 = %d \n",__func__,superResult,ret);
