@@ -4,9 +4,9 @@
 #define CxOOP__METHOD__DECLARE(PREFIX,RET,FUNCNAME,...)\
         static RET PREFIX##_##FUNCNAME ( __VA_ARGS__ );
 #define CxOOP__METHOD__SPAN(PREFIX,RET,FUNCNAME,...)\
-        RET (* FUNCNAME )( __VA_ARGS__ );
+        const RET (* FUNCNAME )( __VA_ARGS__ );
 #define CxOOP__METHOD__OVERRIDE_SPAN(PREFIX,RET,FUNCNAME,...)\
-        RET (* SUPER_##FUNCNAME )( __VA_ARGS__ );
+        const RET (* SUPER_##FUNCNAME )( __VA_ARGS__ );
 
 #define CxOOP_STRUCT_PUB_(CLASSNAME,COBJ)\
         CLASSNAME##_PUBLIC_MEMBER_\
@@ -51,11 +51,11 @@
         CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,CxOOP__METHOD__DECLARE)\
 
 #define CxOOP__METHOD__SETTING(PREFIX,RET,FUNCNAME,...)\
-        omni_obj_____->FUNCNAME=PREFIX##_##FUNCNAME;\
+        *(void**)&(omni_obj_____->FUNCNAME)=(void*)PREFIX##_##FUNCNAME;\
 
 #define CxOOP__METHOD__OVERRIDE_SETTING(PREFIX,RET,FUNCNAME,...)\
-        omni_obj_____->SUPER_##FUNCNAME=(void*)omni_obj_____->FUNCNAME;\
-        omni_obj_____->FUNCNAME=(void*)PREFIX##_##FUNCNAME;\
+        *(void**)&(omni_obj_____->SUPER_##FUNCNAME)=(void*)omni_obj_____->FUNCNAME;\
+        *(void**)&(omni_obj_____->FUNCNAME)=(void*)PREFIX##_##FUNCNAME;\
 
 #define CxOOP_INIT_METHOD(CLASSNAME,obj_ptr)\
         __OMNI__##CLASSNAME *omni_obj_____=(void*)obj_ptr;\
