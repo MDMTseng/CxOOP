@@ -14,7 +14,7 @@ int DESTRUCTOR_DECEN_OBJ(DECEN_OBJ* obj)
     return 0;
 }
 
-static int DECEN_OBJ_DoAction( DECEN_OBJ* obj)
+static int DoAction( DECEN_OBJ* obj)
 {
     __OMNI__DECEN_OBJ *oobj=(void*)obj;
 

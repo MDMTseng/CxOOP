@@ -17,7 +17,7 @@ int DESTRUCTOR_CHILD_OBJ(CHILD_OBJ* obj)
     return 0;
 }
 
-static int CHILD_OBJ_DoAction( CHILD_OBJ* obj)
+static int DoAction( CHILD_OBJ* obj)
 {
     __OMNI__CHILD_OBJ *oobj=(void*)obj;
 

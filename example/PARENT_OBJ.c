@@ -13,7 +13,7 @@ int DESTRUCTOR_PARENT_OBJ(PARENT_OBJ* obj)
 {
     return 0;
 }
-static int PARENT_OBJ_DoAction( PARENT_OBJ* a)
+static int DoAction( PARENT_OBJ* a)
 {
     printf("%s get pub:%d \n",__func__,a->pub);
     return a->pub;

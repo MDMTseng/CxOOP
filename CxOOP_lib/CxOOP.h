@@ -2,7 +2,7 @@
 #define C_X_OOP_H_
 
 #define CxOOP__METHOD__DECLARE(PREFIX,RET,FUNCNAME,...)\
-        static RET PREFIX##_##FUNCNAME ( __VA_ARGS__ );
+        static RET FUNCNAME ( __VA_ARGS__ );
 #define CxOOP__METHOD__SPAN(PREFIX,RET,FUNCNAME,...)\
         const RET (* FUNCNAME )( __VA_ARGS__ );
 #define CxOOP__METHOD__OVERRIDE_SPAN(PREFIX,RET,FUNCNAME,...)\
@@ -51,11 +51,11 @@
         CLASSNAME##_OVERRIDE_METHOD_(CLASSNAME,CxOOP__METHOD__DECLARE)\
 
 #define CxOOP__METHOD__SETTING(PREFIX,RET,FUNCNAME,...)\
-        *(void**)&(omni_obj_____->FUNCNAME)=(void*)PREFIX##_##FUNCNAME;\
+        *(void**)&(omni_obj_____->FUNCNAME)=(void*)FUNCNAME;\
 
 #define CxOOP__METHOD__OVERRIDE_SETTING(PREFIX,RET,FUNCNAME,...)\
         *(void**)&(omni_obj_____->SUPER_##FUNCNAME)=(void*)omni_obj_____->FUNCNAME;\
-        *(void**)&(omni_obj_____->FUNCNAME)=(void*)PREFIX##_##FUNCNAME;\
+        *(void**)&(omni_obj_____->FUNCNAME)=(void*)FUNCNAME;\
 
 #define CxOOP_INIT_METHOD(CLASSNAME,obj_ptr)\
         __OMNI__##CLASSNAME *omni_obj_____=(void*)obj_ptr;\
